@@ -1,10 +1,6 @@
 using Gadfly
 using Optim: optimize
 
-# loading linear regression functions
-using linear_regression_vec
-using linear_regression
-
 # load the data from file
 data = readdlm("housing.data")
 
@@ -36,6 +32,66 @@ n = size(train_X, 1)
 # Initialize the coefficient vector theta to random values.
 theta = rand(n)
 
+### These functions were originally defined in 'linear_regression.jl'
+# TODO:  Implement the linear regression objective and gradient computations
+#        The linear regression objective is J and the gradient is g!
+#
+# Note: originally named `linear_regression` I find that J for the error
+# function (or objective function) is much clearer.
+function J(_theta::Vector)
+    obj = 0
+
+    # TODO:  Compute the linear regression objective by looping over the examples in X.
+    #        Store the objective function value in 'obj' (originaly 'f').
+
+    ### YOUR CODE HERE ###
+end
+
+# other than the matlab version of this excercise,
+# we calculate the gradient in another function due to
+# the optimize function of the Optim package.
+function g!(_theta::Vector, storage::Vector)
+    for k = 1:length(storage)
+        storage[k] = 0
+    end
+
+    # TODO:  Compute the gradient of the objective with respect to theta by looping over
+    #        the examples in X and adding up the gradient for each example.  Store the
+    #        computed gradient in 'storage' ('g' in the original assignment).
+
+    ### YOUR CODE HERE ###
+end
+
+### These methods were originally defined in linear_regression_vec.jl
+# TODO:  Implement the linear regression objective and gradient computations
+#        The linear regression objective is J and the gradient is g!
+#
+# Note: originally named `linear_regression` I find that J for the error
+# function (or objective function) is much clearer.
+function J_vec(_theta::Vector)
+    obj = 0
+
+    # TODO:  Compute the linear regression objective by looping over the examples in X.
+    #        Store the objective function value in 'obj' (originaly 'f').
+
+    ### YOUR CODE HERE ###
+end
+
+# other than the matlab version of this excercise,
+# we calculate the gradient in another function due to
+# the optimize function of the Optim package.
+function g_vec!(_theta::Vector, storage::Vector)
+    for k = 1:length(storage)
+        storage[k] = 0
+    end
+
+    # TODO:  Compute the gradient of the objective with respect to theta by looping over
+    #        the examples in X and adding up the gradient for each example.  Store the
+    #        computed gradient in 'storage' ('g' in the original assignment).
+
+    ### YOUR CODE HERE ###
+end
+
 # Run the optimize function with J (originally 'linear_regression') as the objective.
 #
 # TODO:  Implement linear regression in linear_regression.jl
@@ -51,8 +107,8 @@ println("Optimization took $elapsed seconds.")
 # TODO:  Implement linear regression in linear_regression_vec.jl
 # using vectorization features to speed up your code (certainly not true
 # for julia).
-# Compare the running time for your linear_regression.jl and
-# linear_regression_vec.jl implementations.
+# Compare the running time for your linear_regression and
+# linear_regression_vec implementations.
 #
 # Uncomment the lines below to run your vectorized code.
 # Re-initialize parameters
