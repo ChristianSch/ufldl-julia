@@ -26,7 +26,10 @@ train_y = data[end, 1:400]
 test_X = data[1:end-1,401:end]
 test_y = data[end,401:end]
 
+# number of training data sets
 m = size(train_X, 2)
+
+# number of features
 n = size(train_X, 1)
 
 # Initialize the coefficient vector theta to random values.
