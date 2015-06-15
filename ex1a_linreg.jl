@@ -117,7 +117,7 @@ println("Optimization took $elapsed seconds.")
 # Re-initialize parameters
 # theta = rand(n)
 # tic() # start timer (is read by toc())
-# result = optimize(J, g!, theta, method=:gradient_descent, iterations=200)
+# result = optimize(J_vec, g!, theta, method=:gradient_descent, iterations=200)
 #
 # elapsed = toc()
 # println("Optimization took $elapsed seconds.")
