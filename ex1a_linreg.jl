@@ -126,7 +126,8 @@ test_rms = sqrt(mean(((result.minimum' * test_X) - test_y).^2))
 println("Test RMS: $test_rms")
 
 Gadfly.plot(
-    layer(x=1:length(test_y), y=sort(test_y'[:, 1]), Geom.point),
-    layer(x=1:length(test_y), y=sort(predicted_prices'[:, 1]), Geom.point),
+    Guide.xlabel("House #"), Guide.ylabel("House price (\$1000s)"),
+    layer(x=1:length(test_y), y=sort(test_y'[:, 1]), Geom.point, Theme(default_color=color("red"))),
+    layer(x=1:length(test_y), y=sort((result.minimum' * test_X)'[:, 1]), Geom.point),
 )
 
