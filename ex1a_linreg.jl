@@ -53,7 +53,7 @@ end
 # other than the matlab version of this excercise,
 # we calculate the gradient in another function due to
 # the optimize function of the Optim package.
-function g!(_theta::Vector, storage::Vector)
+function g!(theta::Vector, storage::Vector)
     for k = 1:length(storage)
         storage[k] = 0
     end
@@ -71,28 +71,22 @@ end
 #
 # Note: originally named `linear_regression` I find that J for the error
 # function (or objective function) is much clearer.
-function J_vec(_theta::Vector)
+function J_vec(theta::Vector)
     obj = 0
 
     # TODO:  Compute the linear regression objective by looping over the examples in X.
     #        Store the objective function value in 'obj' (originaly 'f').
 
     ### YOUR CODE HERE ###
-end
-
-# other than the matlab version of this excercise,
-# we calculate the gradient in another function due to
-# the optimize function of the Optim package.
-function g_vec!(_theta::Vector, storage::Vector)
-    for k = 1:length(storage)
-        storage[k] = 0
+    for i = 1:m
+        # this results in an array with one element, thus we need
+        # to take the first (and only) element
+        obj += ((theta' * train_X[:, i]) - train_y[i])[1]^2
     end
 
-    # TODO:  Compute the gradient of the objective with respect to theta by looping over
-    #        the examples in X and adding up the gradient for each example.  Store the
-    #        computed gradient in 'storage' ('g' in the original assignment).
+    println("J: $(obj/2)")
 
-    ### YOUR CODE HERE ###
+    obj / 2
 end
 
 # Run the optimize function with J (originally 'linear_regression') as the objective.
