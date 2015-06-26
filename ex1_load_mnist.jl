@@ -1,5 +1,5 @@
 module ex1_load_mnist
-export loadMNISTImages
+export loadMNISTImages, loadMNISTLabels
 
 function loadMNISTImages(filename::String)
     fp = open(filename, "r");
@@ -29,6 +29,25 @@ function loadMNISTImages(filename::String)
     images = images ./ 255.0
 
     return images
+end
+
+function loadMNISTLabels(filename::String)
+    fp = open(filename, "r");
+
+    magic = hton(read(fp, Int32))
+    @assert(magic == 2049, "Bad magic number in $(filename)")
+
+    numLabels = hton(read(fp, Int32))
+    labels = read(fp, Int8, numLabels)
+    # convert to big endian
+    labels = map(hton, labels)
+
+    # this shouldn't be possible anyway ...
+    @assert(size(labels, 1) == numLabels, "Mismatch in label count")
+
+    close(fp)
+
+    return labels
 end
 
 end
