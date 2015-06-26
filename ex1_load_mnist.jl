@@ -4,17 +4,19 @@ export loadMNISTImages
 function loadMNISTImages(filename::String)
     fp = open(filename, "r");
 
-    magic = hton(read(fp, Uint32))
+    magic = hton(read(fp, Int32))
     @assert(magic == 2051, "Bad magic number in $filename")
 
-    numImages = hton(read(fp, Uint32))
+    numImages = hton(read(fp, Int32))
     println("numImages: $numImages")
-    numRows = hton(read(fp, Uint32))
+    numRows = hton(read(fp, Int32))
     println("numRows: $numRows")
-    numCols = hton(read(fp, Uint32))
+    numCols = hton(read(fp, Int32))
     println("numCols: $numCols")
 
-    images = read(fp, Uint8, numRows * numCols * numImages)
+    images = read(fp, Int8, numRows * numCols * numImages)
+    # convert to big endian
+    images = map(hton, images)
 
     images = reshape(images, 28, 28, 10000) # numCols, numRows, numImages
     images = permutedims(images,[2 1 3])
