@@ -78,15 +78,6 @@ function J_vec(theta::Vector)
     #        Store the objective function value in 'obj' (originaly 'f').
 
     ### YOUR CODE HERE ###
-    for i = 1:m
-        # this results in an array with one element, thus we need
-        # to take the first (and only) element
-        obj += ((theta' * train_X[:, i]) - train_y[i])[1]^2
-    end
-
-    println("J: $(obj/2)")
-
-    obj / 2
 end
 
 # Run the optimize function with J (originally 'linear_regression') as the objective.
